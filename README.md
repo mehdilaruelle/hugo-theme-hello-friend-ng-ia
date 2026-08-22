@@ -85,6 +85,7 @@ This theme was highly inspired by the [hello-friend](https://github.com/panr/hug
 - Support for [utterances](https://utteranc.es/) comment system
 - Front page content from `content/_index.md`, see [Front page content](#front-page-content)
 - JSON-LD structured data and a complete `hreflang` set, see [SEO](#seo)
+- Optional `llms.txt` and a Markdown copy of each page, see [llms.txt](docs/config.md#llmstxt)
 
 ## SEO
 

@@ -92,3 +92,15 @@ other = "「{{ .Term }}」カテゴリーの記事すべて。"
 
 [termDescription]
 other = "「{{ .Term }}」に分類された記事すべて。"
+
+
+# Markdown output and llms.txt
+#
+[llmsCanonical]
+other = "初出"
+
+[posts]
+other = "記事"
+
+[pages]
+other = "ページ"

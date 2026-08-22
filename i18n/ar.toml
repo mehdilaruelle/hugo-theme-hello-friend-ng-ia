@@ -106,3 +106,15 @@ other = "كل المقالات في تصنيف «{{ .Term }}»."
 
 [termDescription]
 other = "كل المقالات المصنّفة تحت «{{ .Term }}»."
+
+
+# Markdown output and llms.txt
+#
+[llmsCanonical]
+other = "نُشر في الأصل على"
+
+[posts]
+other = "المقالات"
+
+[pages]
+other = "الصفحات"
