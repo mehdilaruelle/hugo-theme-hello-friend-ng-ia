@@ -1,0 +1,30 @@
+{{- /* Goldmark already gives every heading an id and the table of contents
+       already links to it, so the fragments worked; what a reader had no way
+       to do was see or copy one without opening the page source.
+
+       The id stays .Anchor, the value Goldmark computed. Deriving another
+       would break every inbound link to a section and leave .TableOfContents
+       pointing at headings that no longer answer to those names.
+
+       .Attributes has to be repeated here: this hook replaces the markup that
+       carried it, so an id or class written under the heading is dropped. id
+       is skipped in that loop because .Anchor is already that same value, and
+       emitting it twice makes the attribute ambiguous.
+
+       .Text, not .PlainText: the second flattens the code, emphasis and links
+       an author wrote inside the heading.
+
+       The link carries no text at all -- the name is an aria-label and the
+       glyph comes from CSS. Written the obvious way, with a visually hidden
+       label and a "#" beside it, that text became part of the heading, and
+       everything downstream that flattens rendered content read it back:
+       description.html cut a summary that said "Move static content to static
+       Link to this section# Jekyll has a rule…" and shipped it as the meta
+       description, and the search index picked the phrase up once per heading.
+       plainify and .Plain drop a tag whole, attributes with it, so a name that
+       lives in an attribute stays out of them. */ -}}
+{{- $anchor := .Anchor -}}
+<h{{ .Level }} id="{{ $anchor }}"
+  {{- range $k, $v := .Attributes }}
+    {{- if ne $k "id" }}{{ with $v }}{{ printf " %s=%q" $k . | safeHTMLAttr }}{{ end }}{{ end }}
+  {{- end }}>{{ .Text }}<a class="heading-anchor" href="#{{ $anchor }}" aria-label="{{ partial "i18n.html" (dict "key" "headingAnchor" "fallback" "Link to this section") }}"></a></h{{ .Level }}>
