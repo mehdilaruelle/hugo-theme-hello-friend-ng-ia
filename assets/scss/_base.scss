@@ -85,6 +85,51 @@ h4 {
   font-size: 1.125rem;
 }
 
+// A fragment jump puts the heading flush against the top of the window. There
+// is no sticky header here to clear, so this is breathing room and nothing
+// more.
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  scroll-margin-top: 1rem;
+
+  // The anchor is out of the reading line until the heading is under the
+  // pointer. opacity and not display, so the heading does not reflow the
+  // moment it is hovered.
+  &:hover .heading-anchor {
+    opacity: 1;
+  }
+}
+
+// The anchor _markup/render-heading.html adds to every heading. The glyph is
+// generated here rather than written into the markup: as text it belonged to
+// the heading, and everything that flattens rendered content read it back --
+// the meta description and the search index both quoted it.
+.heading-anchor {
+  margin-left: 0.3em;
+  opacity: 0;
+  font-weight: normal;
+  text-decoration: none;
+  color: $light-color-secondary;
+
+  @media (prefers-color-scheme: dark) { color: $dark-color-secondary; }
+  @media (prefers-color-scheme: light) { color: $light-color-secondary; }
+  [data-theme=dark] & { color: $dark-color-secondary; }
+  [data-theme=light] & { color: $light-color-secondary; }
+
+  &::before {
+    content: "#";
+  }
+
+  // Hover alone leaves the anchor a tab stop nobody can see.
+  &:focus-visible {
+    opacity: 1;
+  }
+}
+
 @media #{$media-size-phone} {
   h1 {
     font-size: 2rem;
